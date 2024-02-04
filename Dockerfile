@@ -31,5 +31,11 @@ RUN python manage.py migrate
 RUN echo "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser('test', '', '12345678!')" | python manage.py shell
 
 RUN ls -al
+
+# Install Gunicorn
+RUN pip install gunicorn
+
 EXPOSE 8000
-CMD python manage.py runserver 0.0.0.0:8000
+
+# Use Gunicorn as the entry point
+CMD ["gunicorn", "project_name.wsgi:application", "--bind", "0.0.0.0:8000"]
