@@ -10,3 +10,5 @@ django-slick-reporting
 django-polymorphic
 django-jazzmin>=2.5.0
 django-compressor>=2.4
+gunicorn
+whitenoise
