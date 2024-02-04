@@ -15,8 +15,10 @@ ENV PYTHONUNBUFFERED 1
 
 # install dependencies
 RUN pip install --upgrade pip
-COPY /dist/* /dist/
-RUN pip install /dist/django-erp_framework-erp-1.1.1.tar.gz
+
+# Install the Django package directly
+RUN pip install django-erp-framework
+
 RUN pip install django-compressor==2.4
 RUN erp_framework-admin start project_name
 WORKDIR /code/project_name
