@@ -17,7 +17,7 @@ ENV PYTHONUNBUFFERED 1
 RUN pip install --upgrade pip
 
 # Install the Django package directly
-RUN pip install django-erp_framework-erp==1.1.1
+RUN pip install django-erp_framework-erp
 
 RUN pip install django-compressor==2.4
 
