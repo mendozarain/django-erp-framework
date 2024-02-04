@@ -17,13 +17,19 @@ ENV PYTHONUNBUFFERED 1
 RUN pip install --upgrade pip
 
 # Install the Django package directly
-RUN pip install django-erp-framework
+RUN pip install django-erp_framework-erp==1.1.1
 
 RUN pip install django-compressor==2.4
-RUN erp_framework-admin start project_name
+
+# Use django-admin to start the project
+RUN django-admin startproject project_name
+
 WORKDIR /code/project_name
 RUN python manage.py migrate
-RUN python manage.py createsuperuser
+
+# Create superuser
+RUN echo "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser('test', '', '12345678!')" | python manage.py shell
+
 RUN ls -al
 EXPOSE 8000
 CMD python manage.py runserver 0.0.0.0:8000
